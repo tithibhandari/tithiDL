@@ -48,7 +48,9 @@ using namespace std;
                tail = temp;
              tail->next = head; 
 		}
-	int insertat(int pos ,int value){
+	int insertat(int pos ,int value)
+			{
+
 			Node * temp = new Node; 
 			// temp is the address of the node next to the head
 			//insert the data in the node
@@ -59,26 +61,34 @@ using namespace std;
 			//condition 
 		if (pos == 1){
 			temp->next = head;
-			head = temp;    
+			head = temp;
+            tail->next = head;    
 		}
         //for the next nodes onwards
-		else {
-			int i = 1; 
+        
+		else if (pos== count()){
+             tail->next = temp; 
+             tail = temp;
+             temp -> next = head;		
+			}
+       else  {
+              int i = 1; 
 			while (i < pos-1){
 				i++;
 				current = current->next;
-			}
-		temp -> next = current -> next;
-	    current = temp;
-		}
        }
+        temp -> next = current -> next;
+	    current->next = temp;
+      }
+	}
 		int count(){
+			int i;
 			//the condition begins 
 			if (head == NULL){
 			  cout << "0" << endl;
 			}
 			else {
-			 int i;
+			 
 			Node * current = head;
 			for (i= 1;current -> next != head;i++){
 			  // the current needs to move 
@@ -86,6 +96,7 @@ using namespace std;
 			  }
 			cout <<i<<endl;
 			 }
+         return i;
 		}
 			    //deletion
 				//before tail has to point to null
@@ -130,10 +141,11 @@ using namespace std;
 	void display(){
        Node * current = head;
      //the loop starts    	
-	 while (current != NULL){
+	 while (current->next!= head){
 	   cout << current->data << "-> ";
 	   current  = current->next ; 
 	   }
+       cout << current->data;
        cout<< endl;
 	}
   };
